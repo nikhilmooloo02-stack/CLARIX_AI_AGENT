@@ -13,12 +13,6 @@ Built as a capstone project for the Mentec Foundation Generative AI Certificatio
 
 ---
 
-## Live Demo
-
-Try CLARIX live: [ShaNealonline.co.za](https://www.shanealonline.co.za)
-
----
-
 ## Key Capabilities
 
 **Customer Support**
@@ -26,6 +20,7 @@ Try CLARIX live: [ShaNealonline.co.za](https://www.shanealonline.co.za)
 - Acknowledges issues with empathy and offers structured solutions
 - Automatically escalates high-value or complex cases to human agents
 - Maintains full conversation memory throughout the session
+- Generates quotations and considers financial metrics 
 
 **Product Intelligence**
 - Answers product availability and pricing queries instantly

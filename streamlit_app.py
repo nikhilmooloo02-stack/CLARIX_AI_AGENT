@@ -416,7 +416,7 @@ def generate_quote(customer_name: str, company_name: str, items_text: str) -> tu
         elements.append(Spacer(1, 3 * mm))
         
         # Divider
-        divider = Table([[""]]], colWidths=[170 * mm])
+        divider = Table([[""]], colWidths=[170 * mm])
         divider.setStyle(TableStyle([
             ("BACKGROUND", (0, 0), (-1, -1), colors.HexColor(CONFIG["ACCENT_COLOR"])),
             ("ROWHEIGHTS", (0, 0), (-1, -1), 2),
@@ -747,7 +747,7 @@ footer_html = f"""
     </a>
     <br><br>
     <span style="font-size:10px; color:#aaa;">
-    CLARIX is a product of <strong style="color:{CONFIG['PRIMARY_COLOR']}">Nikhil Dante Mooloo</strong>
+    CLARIX is a product of <strong style="color:{CONFIG['PRIMARY_COLOR']};">Nikhil Dante Mooloo</strong>
     · AI Business Operations Specialist · Pretoria
     </span>
 </div>

@@ -349,4 +349,4 @@ if st.session_state.latest_quote:
         )
 
 st.markdown("---")
-st.caption("Powered by CLARIX AI · ShaNeal Distributors · Pretoria")
+st.caption("CLARIX AI · Powered and Developed by Nikhil Dante Mooloo · ShaNeal Distributors · Pretoria")

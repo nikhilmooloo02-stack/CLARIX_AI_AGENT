@@ -1,5 +1,5 @@
 # streamlit_app.py
-# CLARIX AI Assistant for ShaNeal Distributors - Improved Version for Streamlit Cloud
+# CLARIX AI Assistant for ShaNeal Distributors - Optimized for Streamlit Cloud
 
 # ========== ENVIRONMENT SETUP ==========
 try:
@@ -16,8 +16,6 @@ import chromadb
 import re
 import datetime
 import random
-import tempfile
-import os
 import logging
 from urllib.parse import quote
 from io import BytesIO
@@ -31,7 +29,7 @@ from reportlab.lib.units import mm
 # ========== LOGGING SETUP ==========
 logging.basicConfig(
     level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    format='%(asctime)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
 
@@ -216,11 +214,12 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# Hide streamlit menu
+# Hide streamlit menu and footer
 hide_menu_style = """
     <style>
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
+    header {visibility: hidden;}
     </style>
     """
 st.markdown(hide_menu_style, unsafe_allow_html=True)
@@ -367,7 +366,7 @@ def get_pdf_styles():
 
 def generate_quote(customer_name: str, company_name: str, items_text: str) -> tuple:
     """
-    Generate a professional PDF quote.
+    Generate a professional PDF quote in memory.
     
     Args:
         customer_name: Customer's name
@@ -394,7 +393,7 @@ def generate_quote(customer_name: str, company_name: str, items_text: str) -> tu
         today = datetime.datetime.now().strftime("%d %B %Y")
         valid_until = (datetime.datetime.now() + datetime.timedelta(days=CONFIG["QUOTE_VALIDITY_DAYS"])).strftime("%d %B %Y")
         
-        # Create PDF in memory
+        # Create PDF in memory (better for cloud environments)
         pdf_buffer = BytesIO()
         doc = SimpleDocTemplate(
             pdf_buffer,
@@ -417,7 +416,7 @@ def generate_quote(customer_name: str, company_name: str, items_text: str) -> tu
         elements.append(Spacer(1, 3 * mm))
         
         # Divider
-        divider = Table([[""]], colWidths=[170 * mm])
+        divider = Table([[""]]], colWidths=[170 * mm])
         divider.setStyle(TableStyle([
             ("BACKGROUND", (0, 0), (-1, -1), colors.HexColor(CONFIG["ACCENT_COLOR"])),
             ("ROWHEIGHTS", (0, 0), (-1, -1), 2),
@@ -528,7 +527,7 @@ def get_whatsapp_link(summary: str) -> str:
 @st.cache_data(ttl=3600)
 def get_product_context(message: str) -> str:
     """
-    Get product context from knowledge base.
+    Get product context from knowledge base (cached).
     
     Args:
         message: User message
@@ -671,13 +670,11 @@ quick_actions = [
     "How can I contact ShaNeal Distributors?",
 ]
 
-col1, col2 = st.columns([3, 1])
-with col1:
-    selected_action = st.selectbox(
-        "Choose an example question",
-        [""] + quick_actions,
-        label_visibility="collapsed"
-    )
+selected_action = st.selectbox(
+    "Choose an example question",
+    [""] + quick_actions,
+    label_visibility="collapsed"
+)
 
 if selected_action:
     st.session_state.pending_question = selected_action
@@ -750,7 +747,7 @@ footer_html = f"""
     </a>
     <br><br>
     <span style="font-size:10px; color:#aaa;">
-    CLARIX is a product of <strong style="color:{CONFIG['PRIMARY_COLOR']};">Nikhil Dante Mooloo</strong>
+    CLARIX is a product of <strong style="color:{CONFIG['PRIMARY_COLOR']}">Nikhil Dante Mooloo</strong>
     · AI Business Operations Specialist · Pretoria
     </span>
 </div>

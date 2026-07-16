@@ -110,7 +110,7 @@ All configuration is centralized in the `CONFIG` dictionary at the top of `strea
 ```python
 CONFIG = {
     "APP_TITLE": "CLARIX — ShaNeal Distributors",
-    "WHATSAPP_NUMBER": "27723304651",
+    "WHATSAPP_NUMBER": "-------",
     "API_MODEL": "claude-sonnet-4-5",
     "MAX_TOKENS": 1000,
     "VAT_RATE": 0.15,

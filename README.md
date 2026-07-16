@@ -2,7 +2,7 @@
 
 ![Streamlit Cloud](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)
 
-CLARIX is a professional AI-powered customer service assistant for **ShaNeal Distributors**, a stationery, PPE, office equipment and household consumables distributor based in Pretoria, South Africa.
+CLARIX is a professional AI-powered customer service assistant for **ShaNeal Distributors**, a stationery, PPE, office equipment and household consumables distributor based in Pretoria, South Africa. (All items and prices are hypothesised and do not contain real data at present)
 
 ## Features
 

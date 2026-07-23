@@ -1,5 +1,5 @@
 import streamlit as st
-import anthropic
+from groq import Groq
 import re
 import datetime
 import random
@@ -22,13 +22,6 @@ st.set_page_config(
 
 st.title("CLARIX — ShaNeal Distributors AI Assistant")
 st.caption("Ask about products, request a quote, or get support.")
-
-
-# ---------------- API CONNECTION ----------------
-
-client = anthropic.Anthropic(
-    api_key=st.secrets["ANTHROPIC_API_KEY"]
-)
 
 
 # ---------------- PRODUCTS ----------------
@@ -132,6 +125,11 @@ If name/company/items are missing, ask for the missing information.
 """
 
 
+# ---------------- API CONNECTION ----------------
+
+client = Groq(api_key=st.secrets["GROQ_API_KEY"])
+
+
 # ---------------- PDF QUOTE FUNCTION ----------------
 
 def generate_quote(customer_name, company_name, items_text):
@@ -227,7 +225,7 @@ def generate_quote(customer_name, company_name, items_text):
 # ---------------- CHAT FUNCTION ----------------
 
 def ask_clarix(user_message):
-    conversation = []
+    conversation = [{"role": "system", "content": SYSTEM_PROMPT}]
 
     for msg in st.session_state.messages:
         conversation.append({
@@ -248,14 +246,13 @@ Product information:
         "content": enhanced_message
     })
 
-    response = client.messages.create(
-        model="claude-sonnet-4-5",
+    response = client.chat.completions.create(
+        model="llama-3.3-70b-versatile",
         max_tokens=1000,
-        system=SYSTEM_PROMPT,
         messages=conversation
     )
 
-    reply = response.content[0].text
+    reply = response.choices[0].message.content
 
     if "GENERATE_QUOTE" in reply:
         name_match = re.search(r"NAME:\s*(.+)", reply)

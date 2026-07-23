@@ -1,5 +1,5 @@
 import streamlit as st
-import anthropic
+import google.generativeai as genai
 import re
 import datetime
 import random
@@ -22,13 +22,6 @@ st.set_page_config(
 
 st.title("CLARIX — ShaNeal Distributors AI Assistant")
 st.caption("Ask about products, request a quote, or get support.")
-
-
-# ---------------- API CONNECTION ----------------
-
-client = anthropic.Anthropic(
-    api_key=st.secrets["ANTHROPIC_API_KEY"]
-)
 
 
 # ---------------- PRODUCTS ----------------
@@ -132,6 +125,16 @@ If name/company/items are missing, ask for the missing information.
 """
 
 
+# ---------------- API CONNECTION ----------------
+
+genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
+
+model = genai.GenerativeModel(
+    model_name="gemini-2.0-flash",
+    system_instruction=SYSTEM_PROMPT
+)
+
+
 # ---------------- PDF QUOTE FUNCTION ----------------
 
 def generate_quote(customer_name, company_name, items_text):
@@ -227,12 +230,13 @@ def generate_quote(customer_name, company_name, items_text):
 # ---------------- CHAT FUNCTION ----------------
 
 def ask_clarix(user_message):
-    conversation = []
+    history = []
 
     for msg in st.session_state.messages:
-        conversation.append({
-            "role": msg["role"],
-            "content": msg["content"]
+        role = "model" if msg["role"] == "assistant" else "user"
+        history.append({
+            "role": role,
+            "parts": [msg["content"]]
         })
 
     enhanced_message = f"""
@@ -243,19 +247,10 @@ Product information:
 {PRODUCTS_TEXT}
 """
 
-    conversation.append({
-        "role": "user",
-        "content": enhanced_message
-    })
+    chat = model.start_chat(history=history)
+    response = chat.send_message(enhanced_message)
 
-    response = client.messages.create(
-        model="claude-sonnet-4-5",
-        max_tokens=1000,
-        system=SYSTEM_PROMPT,
-        messages=conversation
-    )
-
-    reply = response.content[0].text
+    reply = response.text
 
     if "GENERATE_QUOTE" in reply:
         name_match = re.search(r"NAME:\s*(.+)", reply)

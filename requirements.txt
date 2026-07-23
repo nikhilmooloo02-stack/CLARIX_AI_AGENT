@@ -1,7 +1,4 @@
 streamlit
-HEAD
 groq
-fc82bdf68ab2ff8aca9a72f31a028208531d6beb
 reportlab
 requests
-PyPDF2

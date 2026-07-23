@@ -2,17 +2,17 @@
 
 ![Streamlit Cloud](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)
 
-CLARIX is a professional AI-powered customer service assistant for **ShaNeal Distributors**, a stationery, PPE, office equipment and household consumables distributor based in Pretoria, South Africa.
+CLARIX is a professional AI-powered customer service assistant for **ShaNeal Distributors**, a stationery, PPE, office equipment and household consumables distributor based in Pretoria, South Africa. (All items and prices are hypothesised and do not contain real data at present)
 
 ## Features
 
-✅ **Intelligent Product Recommendations** - AI-powered product suggestions based on customer needs  
-✅ **Professional Quote Generation** - Automatic PDF quote creation with VAT calculations  
-✅ **Chat-Based Interface** - Natural language conversations with Claude 3.5 Sonnet  
-✅ **Knowledge Base Integration** - ChromaDB semantic search for product information  
-✅ **Financial Calculations** - Automatic VAT (15%) and cost breakdown calculations  
-✅ **Human Escalation** - Automatic routing for complex issues via WhatsApp  
-✅ **Cloud-Ready** - Optimized for Streamlit Cloud deployment  
+**Intelligent Product Recommendations** - AI-powered product suggestions based on customer needs  
+**Professional Quote Generation** - Automatic PDF quote creation with VAT calculations  
+**Chat-Based Interface** - Natural language conversations with Claude 3.5 Sonnet  
+**Knowledge Base Integration** - ChromaDB semantic search for product information  
+**Financial Calculations** - Automatic VAT (15%) and cost breakdown calculations  
+**Human Escalation** - Automatic routing for complex issues via WhatsApp  
+**Cloud-Ready** - Optimized for Streamlit Cloud deployment  
 
 ## Product Catalog
 
@@ -110,7 +110,7 @@ All configuration is centralized in the `CONFIG` dictionary at the top of `strea
 ```python
 CONFIG = {
     "APP_TITLE": "CLARIX — ShaNeal Distributors",
-    "WHATSAPP_NUMBER": "27723304651",
+    "WHATSAPP_NUMBER": "-------",
     "API_MODEL": "claude-sonnet-4-5",
     "MAX_TOKENS": 1000,
     "VAT_RATE": 0.15,
@@ -161,16 +161,16 @@ Streamlit UI Display
 
 ## Key Improvements (v2)
 
-✅ **Centralized Configuration** - Single `CONFIG` dictionary for all settings  
-✅ **Single Source of Truth** - Products defined once, used everywhere  
-✅ **In-Memory PDF Generation** - Better for cloud environments (no disk I/O)  
-✅ **Enhanced Error Handling** - Specific exception catching with logging  
-✅ **Comprehensive Logging** - Track all operations for debugging  
-✅ **Type Hints** - Better code documentation and IDE support  
-✅ **Caching Strategy** - Optimized performance with smart caching  
-✅ **Modular Functions** - Easier to test and maintain  
-✅ **Security** - Proper secret handling for API keys  
-✅ **Production-Ready** - Streamlit Cloud optimizations  
+**Centralized Configuration** - Single `CONFIG` dictionary for all settings  
+**Single Source of Truth** - Products defined once, used everywhere  
+**In-Memory PDF Generation** - Better for cloud environments (no disk I/O)  
+**Enhanced Error Handling** - Specific exception catching with logging  
+**Comprehensive Logging** - Track all operations for debugging  
+**Type Hints** - Better code documentation and IDE support  
+**Caching Strategy** - Optimized performance with smart caching  
+**Modular Functions** - Easier to test and maintain  
+**Security** - Proper secret handling for API keys  
+**Production-Ready** - Streamlit Cloud optimizations  
 
 ## API Keys Required
 
@@ -181,11 +181,11 @@ Streamlit UI Display
 ## Support
 
 **ShaNeal Distributors Contact:**
-- 📞 Phone: 070 070 0770
-- 📧 Email: ShaNeal@lantic.co.za
-- 📍 Address: 332 Paul Kruger Street, Capital Park, Pretoria 0084
-- 🌐 Website: www.ShaNealonline.co.za
-- ⏰ Hours: Monday to Friday, 8am to 6pm
+- Phone: 070 070 0770
+- Email: ShaNeal@lantic.co.za
+- Address: 332 Paul Kruger Street, Capital Park, Pretoria 0084
+- Website: www.ShaNealonline.co.za
+- Hours: Monday to Friday, 8am to 6pm
 
 ## License
 
@@ -199,4 +199,4 @@ Pretoria, South Africa
 
 ---
 
-**Built with ❤️ using Streamlit, Claude AI, and ChromaDB**
+**Built with love using Streamlit, Claude AI, and ChromaDB**

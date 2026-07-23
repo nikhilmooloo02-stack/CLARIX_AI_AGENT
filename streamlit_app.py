@@ -1,5 +1,5 @@
 import streamlit as st
-import google.generativeai as genai
+from groq import Groq
 import re
 import datetime
 import random
@@ -127,12 +127,7 @@ If name/company/items are missing, ask for the missing information.
 
 # ---------------- API CONNECTION ----------------
 
-genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
-
-model = genai.GenerativeModel(
-    model_name="gemini-1.5-flash",
-    system_instruction=SYSTEM_PROMPT
-)
+client = Groq(api_key=st.secrets["GROQ_API_KEY"])
 
 
 # ---------------- PDF QUOTE FUNCTION ----------------
@@ -230,13 +225,12 @@ def generate_quote(customer_name, company_name, items_text):
 # ---------------- CHAT FUNCTION ----------------
 
 def ask_clarix(user_message):
-    history = []
+    conversation = [{"role": "system", "content": SYSTEM_PROMPT}]
 
     for msg in st.session_state.messages:
-        role = "model" if msg["role"] == "assistant" else "user"
-        history.append({
-            "role": role,
-            "parts": [msg["content"]]
+        conversation.append({
+            "role": msg["role"],
+            "content": msg["content"]
         })
 
     enhanced_message = f"""
@@ -247,10 +241,18 @@ Product information:
 {PRODUCTS_TEXT}
 """
 
-    chat = model.start_chat(history=history)
-    response = chat.send_message(enhanced_message)
+    conversation.append({
+        "role": "user",
+        "content": enhanced_message
+    })
 
-    reply = response.text
+    response = client.chat.completions.create(
+        model="llama-3.3-70b-versatile",
+        max_tokens=1000,
+        messages=conversation
+    )
+
+    reply = response.choices[0].message.content
 
     if "GENERATE_QUOTE" in reply:
         name_match = re.search(r"NAME:\s*(.+)", reply)

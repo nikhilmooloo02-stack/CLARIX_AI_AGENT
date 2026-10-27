@@ -247,8 +247,8 @@ Product information:
     })
 
     response = client.chat.completions.create(
-        model="llama-3.3-70b-versatile",
-        max_tokens=1000,
+        model="openai/gpt-oss-120b",
+        max_tokens=2000,
         messages=conversation
     )
 
